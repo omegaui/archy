@@ -1,67 +1,77 @@
 import 'dart:io';
 
+// Define an enumeration for code generation types.
 enum GenType {
   feature,
   core,
 }
 
+// Flags to handle user input.
 bool yesToAll = false;
 bool noToAll = false;
 
+// Store command line arguments.
 List<String> arguments = [];
 
+// Entry point of the program.
 void main(List<String> args) {
+  // Store command line arguments.
   arguments = args;
 
+  // Print a welcome message.
   print("Welcome to archy !!");
   print("Clean Architecture boilerplate Code Generator (Flutter with GetX)");
   print("");
 
+  // Determine the chosen option.
   var option = args[0];
 
+  // Perform actions based on the chosen option.
   switch (option) {
     case "create":
       var projectName = args[1];
-      initStructure(projectName);
+      initStructure(projectName); // Initialize project structure.
       break;
     case "--gen":
       var genType = args[1];
       switch (genType) {
         case "feature":
-          gen();
+          gen(); // Generate feature code.
           break;
         case "core":
-          gen(type: GenType.core);
+          gen(type: GenType.core); // Generate core code.
           break;
       }
       break;
   }
 }
 
+// Function to handle code generation based on the specified type.
 void gen({GenType type = GenType.feature}) {
   switch (type) {
     case GenType.feature:
-      genFeature();
+      genFeature(); // Generate feature code.
       break;
     case GenType.core:
-      genCore();
+      genCore(); // Generate core code (pending functionality).
       break;
   }
 }
 
+// Function to generate feature-specific code.
 void genFeature() {
-  // arguments[2] is --name.
+  // Extract feature name from command line arguments.
   var name = arguments[3];
   var featureRoot = ['lib', 'app'].join(Platform.pathSeparator);
   constructPath([featureRoot, name]);
 
-  // data layer
+  // Generate data layer code.
   constructPath(
     [featureRoot, name, 'data', '${name}_repository_impl.dart'],
     type: FileSystemEntityType.file,
   );
 
-  // domain layer
+  // Generate domain layer code.
   constructPath([featureRoot, name, 'domain', 'entity']);
   constructPath(
     [featureRoot, name, 'domain', 'repository', '${name}_repository.dart'],
@@ -69,16 +79,17 @@ void genFeature() {
   );
   constructPath([featureRoot, name, 'domain', 'usecases']);
 
-  // presentation layer
+  // Generate presentation layer code.
   constructPath([
     featureRoot,
     name,
     'presentation',
   ]);
 
-  // arguments[4] is --states
+  // Extract state names from command line arguments.
   var states = arguments.getRange(5, arguments.length);
   for (var state in states) {
+    // Generate state-specific presentation layer code.
     constructPath([featureRoot, name, 'presentation', state, 'states']);
     constructPath(
         [featureRoot, name, 'presentation', state, '${state}_controller.dart'],
@@ -99,13 +110,15 @@ void genFeature() {
   }
 }
 
+// Function to generate core code (pending functionality).
 void genCore() {
-  // TODO: This functionality is pending
   logInfo("This functionality is pending");
 }
 
+// Function to initialize the project structure.
 void initStructure(String projectRoot) {
   if (projectRoot == '.') {
+    // If project root is not provided, use the current directory.
     projectRoot = Directory.current.path.substring(
         Directory.current.path.lastIndexOf(Platform.pathSeparator) + 1);
   } else {
@@ -114,8 +127,10 @@ void initStructure(String projectRoot) {
 
   logInfo("Generating boilerplate Structure in $projectRoot ...");
 
+  // Define the root directory of the project.
   var sourceRoot = "$projectRoot${Platform.pathSeparator}lib";
 
+  // Generate the directory structure for the project.
   constructPath([sourceRoot, 'app']);
   constructPath([sourceRoot, 'core', 'database', 'data']);
   constructPath([sourceRoot, 'core', 'database', 'domain']);
@@ -127,6 +142,7 @@ void initStructure(String projectRoot) {
       "\nBefore running gen commands, switch to root dir by running:\n\tcd $projectRoot\n");
 }
 
+// Function to create directories and files as needed.
 void constructPath(List<String> path,
     {FileSystemEntityType type = FileSystemEntityType.directory}) {
   String px = path.join(Platform.pathSeparator);
@@ -167,18 +183,21 @@ void constructPath(List<String> path,
   }
 }
 
+// Function to ask for user input and return the response.
 String ask(String text) {
   logSuccess("$text [Y/n]");
   var input = stdin.readLineSync();
   return input ?? "n";
 }
 
+// Function to prompt for user input and return the response.
 String input(String text) {
   logSuccess(text);
   var input = stdin.readLineSync();
   return input ?? "";
 }
 
+// Functions to log different types of messages.
 void logInfo(String msg) {
   print('[INFO] \x1B[1;34m$msg\x1B[0m');
 }

@@ -1,0 +1,12 @@
+# for archy
+
+type: cli
+build:
+  windows:
+    preserve:
+      - archy.exe
+    dependencies:
+      - dart
+    steps:
+      - name: Compiling Archy for windows ...
+        run: dart compile exe -o archy.exe --target-os windows .\bin\archy.dart

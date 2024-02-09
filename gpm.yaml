@@ -9,4 +9,6 @@ build:
       - dart
     steps:
       - name: Compiling Archy for windows ...
-        run: dart compile exe -o archy.exe --target-os windows .\bin\archy.dart
+        run: dart compile exe
+      - name: Moving Binary ...
+        run: mv bin/archy.exe archy.exe

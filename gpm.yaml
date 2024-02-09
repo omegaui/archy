@@ -6,7 +6,9 @@ build:
       preserve:
         - archy.exe
       dependencies:
-        - dart
+        - executable: dart
+          version: ^3.2.6
+          help: You can install dart by running 'choco install dart-sdk'
       steps:
         - name: Compiling Archy for windows ...
           run: dart compile exe

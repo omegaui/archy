@@ -2,13 +2,14 @@
 
 type: cli
 build:
-  windows:
-    preserve:
-      - archy.exe
-    dependencies:
-      - dart
-    steps:
-      - name: Compiling Archy for windows ...
-        run: dart compile exe
-      - name: Moving Binary ...
-        run: mv bin/archy.exe archy.exe
+  - windows:
+      preserve:
+        - archy.exe
+      dependencies:
+        - dart
+      steps:
+        - name: Compiling Archy for windows ...
+          run: dart compile exe
+          ignoreError: true
+        - name: Moving Binary ...
+          run: mv bin/archy.exe archy.exe

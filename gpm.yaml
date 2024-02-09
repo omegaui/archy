@@ -2,7 +2,7 @@
 
 type: cli
 build:
-  - windows:
+  - debian:
       preserve:
         - archy.exe
       dependencies:

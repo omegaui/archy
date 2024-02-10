@@ -11,6 +11,4 @@ build:
           help: You can install dart by running 'choco install dart-sdk'
       steps:
         - name: Compiling Archy for windows ...
-          run: dart compile exe -o archy.exe --target-os windows .\bin\archy.dart
-        - name: Moving Binary ...
-          run: mv bin/archy.exe archy.exe
+          run: dart compile exe -o archy.exe --target-os windows bin\archy.dart

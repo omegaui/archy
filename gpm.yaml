@@ -14,3 +14,13 @@ build:
       steps:
         - name: Compiling Archy for windows ...
           run: dart compile exe -o archy.exe --target-os windows bin\archy.dart
+  - debian:
+      preserve:
+        - archy.exe
+      dependencies:
+        - executable: dart
+          version: ^3.2.6
+          help: You can install dart from https://dart.dev
+      steps:
+        - name: Compiling Archy for windows ...
+          run: dart compile exe -o archy.exe --target-os windows bin\archy.dart

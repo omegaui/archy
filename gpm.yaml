@@ -1,6 +1,6 @@
 # for archy
 
-type: application
+type: cli
 executable: archy.exe
 build:
   - windows:

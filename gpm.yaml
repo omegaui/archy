@@ -19,7 +19,7 @@ build:
         - archy.exe
       dependencies:
         - executable: dart
-          version: ^3.2.6
+          version: ^3.2.0
           help: You can install dart from https://dart.dev
       steps:
         - name: Compiling Archy for windows ...

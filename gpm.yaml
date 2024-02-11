@@ -1,6 +1,6 @@
 # for archy
 
-type: cli
+type: application
 build:
   - windows:
       preserve:

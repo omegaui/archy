@@ -23,4 +23,4 @@ build:
           help: You can install dart from https://dart.dev
       steps:
         - name: Compiling Archy for windows ...
-          run: dart compile exe -o archy.exe --target-os windows bin\archy.dart
+          run: dart compile exe -o archy.exe --target-os linux bin\archy.dart

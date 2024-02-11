@@ -3,7 +3,6 @@ type: cli
 icon: https://img.icons8.com/external-wanicon-two-tone-wanicon/128/external-asteroid-space-wanicon-two-tone-wanicon.png
 build:
   - windows:
-      executable: archy.exe
       preserve:
         - archy.exe
       dependencies:

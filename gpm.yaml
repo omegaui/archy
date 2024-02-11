@@ -1,6 +1,7 @@
 # for archy
 
 type: application
+executable: archy.exe
 build:
   - windows:
       preserve:
